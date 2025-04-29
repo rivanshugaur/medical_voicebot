@@ -45,7 +45,7 @@ def text_to_speech_with_gtts(input_text, output_filepath):
         print(f"An error occurred while trying to play the audio: {e}")
 
 
-input_text="Hi this is Ai with Hassan, autoplay testing!"
+input_text="Hi this is Navneet, autoplay testing!"
 #text_to_speech_with_gtts(input_text=input_text, output_filepath="gtts_testing_autoplay.mp3")
 
 
