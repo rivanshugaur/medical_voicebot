@@ -79,6 +79,8 @@ if audio_value is not None:
                         encoded_image=encode_image(temp_image_path),
                         model="qwen/qwen3.6-27b" # Note: Groq model name, adjust if changed
                     )
+                    import re
+                    doctor_response = re.sub(r'<think>.*?</think>', '', doctor_response, flags=re.DOTALL).strip()
                 except Exception as e:
                     doctor_response = f"Error analyzing image: {e}"
                 finally:
