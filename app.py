@@ -79,7 +79,8 @@ if audio_value is not None:
                         query=speech_to_text_output,
                         system_prompt=system_prompt,
                         encoded_image=encode_image(temp_image_path),
-                        model="qwen/qwen3.6-27b" # Note: Groq model name, adjust if changed
+                        model="qwen/qwen3.6-27b", # Note: Groq model name, adjust if changed
+                        GROQ_API_KEY=groq_key
                     )
                     import re
                     doctor_response = re.sub(r'<think>.*?</think>', '', doctor_response, flags=re.DOTALL).strip()

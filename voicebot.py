@@ -4,9 +4,6 @@ import base64
 from groq import Groq
 load_dotenv()
 
-
-GROQ_API_KEY = os.getenv('GROQ_API_KEY')
-
 def encode_image(image_path):
     try:
         with open(image_path, 'rb') as image_file:
@@ -18,7 +15,7 @@ def encode_image(image_path):
 
 model="qwen/qwen3.6-27b"
 
-def analyze_image_with_query(query, system_prompt, model, encoded_image):
+def analyze_image_with_query(query, system_prompt, model, encoded_image, GROQ_API_KEY):
     """
     Analyze an image with a text query using Groq's vision models.
 
@@ -26,6 +23,7 @@ def analyze_image_with_query(query, system_prompt, model, encoded_image):
         query (str): The text query to ask about the image
         model (str): The model ID to use for analysis
         encoded_image (str): Base64 encoded image data
+        GROQ_API_KEY (str): Groq API key
 
     Returns:
         str: The model's response or an error message
