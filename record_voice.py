@@ -17,7 +17,7 @@ def transcribe_with_groq(GROQ_API_KEY, audio_filepath, stt_model="whisper-large-
         return transcription.text
     except Exception as e:
         logging.error(f"Error in transcription: {e}")
-        return ""
+        raise e
     finally:
         # Make sure to close the file
         if 'audio_file' in locals() and audio_file:

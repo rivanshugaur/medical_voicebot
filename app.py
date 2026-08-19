@@ -45,12 +45,21 @@ if audio_value is not None:
             temp_audio_path = temp_audio.name
             
         try:
-            speech_to_text_output = transcribe_with_groq(
-                GROQ_API_KEY=os.environ.get("GROQ_API_KEY"),
-                audio_filepath=temp_audio_path,
-                stt_model="whisper-large-v3"
-            )
-            st.success(f"**You asked:** {speech_to_text_output}")
+            groq_key = os.environ.get("GROQ_API_KEY")
+            if not groq_key:
+                st.error("GROQ_API_KEY is not set. Please add it to Streamlit Cloud Settings > Secrets.")
+                speech_to_text_output = None
+            else:
+                speech_to_text_output = transcribe_with_groq(
+                    GROQ_API_KEY=groq_key,
+                    audio_filepath=temp_audio_path,
+                    stt_model="whisper-large-v3"
+                )
+                if speech_to_text_output and speech_to_text_output.strip():
+                    st.success(f"**You asked:** {speech_to_text_output}")
+                else:
+                    st.warning("Could not hear any speech. Please try recording again.")
+                    speech_to_text_output = None
         except Exception as e:
             st.error(f"Error transcribing audio: {e}")
             speech_to_text_output = None
