@@ -38,7 +38,7 @@ st.markdown("Upload a medical image and record your question to get an AI analys
 # 1. Image Upload
 uploaded_image = st.file_uploader("1. Upload Medical Image (JPG/PNG)", type=["jpg", "jpeg", "png"])
 if uploaded_image:
-    st.image(uploaded_image, caption="Uploaded Image", use_column_width=True)
+    st.image(uploaded_image, caption="Uploaded Image", use_container_width=True)
 
 # 2. Audio Input (Streamable native Streamlit audio input)
 st.markdown("### 2. Record your question")
