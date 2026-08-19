@@ -62,7 +62,11 @@ def analyze_image_with_query(query, system_prompt, model, encoded_image):
 ]
         )
 
-        return chat_completion.choices[0].message.content
+        import re
+        content = chat_completion.choices[0].message.content
+        # Remove <think>...</think> blocks including newlines
+        content = re.sub(r'<think>.*?</think>', '', content, flags=re.DOTALL).strip()
+        return content
     except Exception as e:
         print(f"Error analyzing image: {e}")
         return f"Error analyzing image: {str(e)}"
