@@ -1,8 +1,4 @@
-dotenv
+streamlit
+python-dotenv
 groq
-speechrecognition
-pydub
-pyaudio
-elevenlabs
-gtts
-gradio
+edge-tts

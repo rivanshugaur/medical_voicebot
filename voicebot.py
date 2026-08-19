@@ -16,9 +16,9 @@ def encode_image(image_path):
         print(f"Error encoding image: {e}")
         return None
 
-model="meta-llama/llama-4-scout-17b-16e-instruct"
+model="qwen/qwen3.6-27b"
 
-def analyze_image_with_query(query, model, encoded_image):
+def analyze_image_with_query(query, system_prompt, model, encoded_image):
     """
     Analyze an image with a text query using Groq's vision models.
 
@@ -40,22 +40,26 @@ def analyze_image_with_query(query, model, encoded_image):
         chat_completion = client.chat.completions.create(
             model=model,
             messages=[
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": query
-                        },
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/jpeg;base64,{encoded_image}"
-                            }
-                        }
-                    ]
+    {
+        "role": "system",
+        "content": system_prompt
+    },
+    {
+        "role": "user",
+        "content": [
+            {
+                "type": "text",
+                "text": query
+            },
+            {
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/jpeg;base64,{encoded_image}"
                 }
-            ]
+            }
+        ]
+    }
+]
         )
 
         return chat_completion.choices[0].message.content
